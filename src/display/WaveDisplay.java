@@ -81,44 +81,38 @@ public class WaveDisplay {
         freqLabel.setMinWidth(LABEL_WIDTH);
         freqLabel.setMinHeight(LABEL_HEIGHT);
         TextField freqField = new TextField();
-        freqField.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                double freq = 0.0;
-                try {
-                    freq = Double.parseDouble(freqField.getText());
-                } catch (Exception e) {
-                    System.out.println("Wrong format.");
-                }
-                if (freq > 0) {
-                    wave = new Wave(Math.calculateFrequency(freq * 1_000_000.0));
-                    drawShapes();
-                }
+        freqField.setOnAction(event -> {
+            double freq = 0.0;
+            try {
+                freq = Double.parseDouble(freqField.getText());
+            } catch (Exception e) {
+                System.out.println("Wrong format.");
+            }
+            if (freq > 0) {
+                wave = new Wave(Math.calculateFrequency(freq * 1_000_000.0));
+                drawShapes();
             }
         });
 
 
-        ampLabel = new Label("Amplify");
+        ampLabel = new Label("Amplitude");
         ampLabel.setFont(font);
         ampLabel.setPadding(new Insets(5));
         ampLabel.setMinWidth(LABEL_WIDTH);
         ampLabel.setMinHeight(LABEL_HEIGHT);
 
         TextField amplitudeField = new TextField("");
-        amplitudeField.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                double amp = 1.0;
-                try {
-                    amp = java.lang.Math.abs(Double.parseDouble(amplitudeField.getText()));
-                } catch (Exception e) {
-                    System.out.println("Wrong format.");
-                }
-                if (amp != 1.0) {
-                    if (wave != null) {
-                        wave.amplifyAmplitude(amp);
-                        drawShapes();
-                    }
+        amplitudeField.setOnAction(event -> {
+            double amp = -1.0;
+            try {
+                amp = java.lang.Math.abs(Double.parseDouble(amplitudeField.getText()));
+            } catch (Exception e) {
+                System.out.println("Wrong format.");
+            }
+            if (amp != -1.0) {
+                if (wave != null) {
+                    wave.amplifyAmplitude(amp);
+                    drawShapes();
                 }
             }
         });
@@ -130,20 +124,17 @@ public class WaveDisplay {
         phaseLabel.setMinHeight(LABEL_HEIGHT);
 
         TextField phaseField = new TextField("");
-        phaseField.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                int shift = 0;
-                try {
-                    shift = java.lang.Math.abs(Integer.parseInt(phaseField.getText()));
-                } catch (Exception e) {
-                    System.out.println("Wrong format.");
-                }
-                if (shift != 0) {
-                    if (wave != null) {
-                        wave.phaseShift(shift);
-                        drawShapes();
-                    }
+        phaseField.setOnAction(event -> {
+            int shift = 0;
+            try {
+                shift = java.lang.Math.abs(Integer.parseInt(phaseField.getText()));
+            } catch (Exception e) {
+                System.out.println("Wrong format.");
+            }
+            if (shift != 0) {
+                if (wave != null) {
+                    wave.phaseShift(shift);
+                    drawShapes();
                 }
             }
         });

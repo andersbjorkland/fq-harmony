@@ -20,26 +20,28 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        WaveDisplay display1 = new WaveDisplay();
-        WaveDisplay display2 = new WaveDisplay();
-        WaveDisplay display3 = new WaveDisplay();
-        WaveDisplay display4 = new WaveDisplay();
-        ScaleDisplay scaleDisplay = new ScaleDisplay(display1);
+        WaveDisplay fq1Display = new WaveDisplay();
+        WaveDisplay fq2Display = new WaveDisplay();
+        WaveDisplay fq3Display = new WaveDisplay();
+        WaveDisplay combinedDisplay = new WaveDisplay();
+        ScaleDisplay scaleDisplay = new ScaleDisplay(fq1Display);
 
         VBox vBox = new VBox();
         vBox.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-        vBox.getChildren().addAll(scaleDisplay, display1.waveGroup(), display2.waveGroup(), display3.waveGroup(), display4.combinedWaves());
+        vBox.getChildren().addAll(fq1Display.waveGroup(), fq2Display.waveGroup(), fq3Display.waveGroup(), combinedDisplay.combinedWaves(), scaleDisplay);
+
+        // Update the combinedDisplay when a fq#Display is updated. Will only work if at least the first two displays has FQ's.
         vBox.setOnKeyReleased(event -> {
-            if (display1.getWave() != null & display2.getWave() != null & display3.getWave() != null) {
-                Wave combinedWave = WaveCombiner.combineInteractingWaves(512, display1.getWave(), display2.getWave(), display3.getWave());
-                display4.setWave(combinedWave, Color.DARKGRAY);
-            } else if (display1.getWave() != null & display2.getWave() != null) {
-                Wave combinedWave = WaveCombiner.combineInteractingWaves(512, display1.getWave(), display2.getWave());
-                display4.setWave(combinedWave, Color.DARKGRAY);
+            if (fq1Display.getWave() != null & fq2Display.getWave() != null & fq3Display.getWave() != null) {
+                Wave combinedWave = WaveCombiner.combineInteractingWaves(512, fq1Display.getWave(), fq2Display.getWave(), fq3Display.getWave());
+                combinedDisplay.setWave(combinedWave, Color.DARKGRAY);
+            } else if (fq1Display.getWave() != null & fq2Display.getWave() != null) {
+                Wave combinedWave = WaveCombiner.combineInteractingWaves(512, fq1Display.getWave(), fq2Display.getWave());
+                combinedDisplay.setWave(combinedWave, Color.DARKGRAY);
             }
         });
 
-        primaryStage.setTitle("model.Wave Main");
+        primaryStage.setTitle("Wave Display");
         primaryStage.setScene(new Scene(vBox));
         primaryStage.getIcons().add(new Image( Main.class.getResourceAsStream("Waveforms.png")));
         primaryStage.show();

@@ -46,8 +46,11 @@ public class Wave {
      * @param amplitudeMultiplier
      */
     public Wave(double wavelength, int phase, double amplitudeMultiplier) {
+
+        // Determine that the wavelength will have an accuracy of 1/RESOLUTION_CELLS_PER_METERS.
         double roundedWavelength = Math.round(wavelength * RESOLUTION_CELLS_PER_METERS);
         roundedWavelength = roundedWavelength / RESOLUTION_CELLS_PER_METERS;
+
         this.wavelength = roundedWavelength;
         this.phase = Math.abs(phase);
         this.amplitudeMultiplier = amplitudeMultiplier;
@@ -56,11 +59,11 @@ public class Wave {
         }
         amplitude = new double[(int)Math.round(RESOLUTION_CELLS_PER_METERS * wavelength)];
         radiansUnit = (2 * Math.PI) / amplitude.length;
-        initializeAmplitudeForOneCycle();
+        initializeAmplitudeForOneCycle(amplitudeMultiplier);
         phaseShift(this.phase);
     }
 
-    private void initializeAmplitudeForOneCycle() {
+    private void initializeAmplitudeForOneCycle(double amplitudeMultiplier) {
         for (int i = 0; i < amplitude.length; i++) {
             amplitude[i] = Math.sin(radiansUnit * i) * amplitudeMultiplier;
         }
@@ -101,9 +104,12 @@ public class Wave {
     }
 
     public void amplifyAmplitude(double amplify) {
+        initializeAmplitudeForOneCycle(amplify);
+        /*
         for (int i = 0; i < amplitude.length; i++) {
             amplitude[i] = amplitude[i] * amplify;
         }
+        */
     }
 
     public double getWavelength() {
