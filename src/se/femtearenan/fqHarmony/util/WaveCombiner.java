@@ -1,9 +1,9 @@
-package util;
+package se.femtearenan.fqHarmony.util;
 
-import model.Wave;
+import se.femtearenan.fqHarmony.model.Wave;
 
 /**
- * A new model.Wave is just one cycle. This class will take a model.Wave or a bunch and combine them until the
+ * A new Wave is just one cycle. This class will take a Wave or a bunch and combine them until the
  * specified length is reached, or fuse different waves end to end.
  */
 public class WaveCombiner {

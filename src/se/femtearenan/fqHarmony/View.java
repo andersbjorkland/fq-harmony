@@ -1,5 +1,7 @@
-import display.ScaleDisplay;
-import display.WaveDisplay;
+package se.femtearenan.fqHarmony;
+
+import se.femtearenan.fqHarmony.display.ScaleDisplay;
+import se.femtearenan.fqHarmony.display.WaveDisplay;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,16 +12,16 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.Wave;
-import util.WaveCombiner;
+import se.femtearenan.fqHarmony.model.Wave;
+import se.femtearenan.fqHarmony.util.WaveCombiner;
 
-public class Main extends Application {
-    public static void main(String[] args) {
-        launch();
+public class View extends Stage {
+
+    public View() {
+        setUp();
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    private void setUp() {
         WaveDisplay fq1Display = new WaveDisplay();
         WaveDisplay fq2Display = new WaveDisplay();
         WaveDisplay fq3Display = new WaveDisplay();
@@ -41,11 +43,9 @@ public class Main extends Application {
             }
         });
 
-        primaryStage.setTitle("Wave Display");
-        primaryStage.setScene(new Scene(vBox));
-        primaryStage.getIcons().add(new Image( Main.class.getResourceAsStream("Waveforms.png")));
-        primaryStage.show();
+        this.setTitle("Wave Display");
+        this.setScene(new Scene(vBox));
+        this.getIcons().add(new Image( View.class.getResourceAsStream("/Waveforms.png")));
     }
-
 
 }

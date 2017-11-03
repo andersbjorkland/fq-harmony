@@ -1,4 +1,4 @@
-package model;
+package se.femtearenan.fqHarmony.model;
 
 /**
  * A wave consisting of a sinus wave in the form of an array with default amplitude stored as a double value between

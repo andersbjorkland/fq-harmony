@@ -1,4 +1,4 @@
-package display;
+package se.femtearenan.fqHarmony.display;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -26,7 +26,7 @@ public class ScaleDisplay extends Group {
     }
 
     public void drawScale() {
-
+        // mark each 10th of a horizontal line with a vertical line.
         int scaleInterval = (int)Math.round(waveDisplay.X_SCALE / 10);
         graphicsContext.setStroke(Color.BLACK);
         graphicsContext.setLineWidth(1);

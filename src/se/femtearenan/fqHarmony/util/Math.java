@@ -1,4 +1,4 @@
-package util;
+package se.femtearenan.fqHarmony.util;
 
 /**
  * A small set of helpful methods.

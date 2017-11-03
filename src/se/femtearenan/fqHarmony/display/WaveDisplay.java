@@ -1,9 +1,7 @@
-package display;
+package se.femtearenan.fqHarmony.display;
 
-import model.Wave;
-import util.Math;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import se.femtearenan.fqHarmony.model.Wave;
+import se.femtearenan.fqHarmony.util.Math;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -14,22 +12,22 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import util.WaveCombiner;
+import se.femtearenan.fqHarmony.util.WaveCombiner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WaveDisplay {
-    public static final int CANVAS_WIDTH = 1000;
-    public static final int CANVAS_HEIGHT = 160;
-    public static final int LABEL_WIDTH = 100;
-    public static final int LABEL_HEIGHT = 10;
-    public static final int X_ITERATOR = 10;
-    public static final int X_SCALE_MULTIPLIER = 1;
-    public static final double AMP_RESOLUTION = 5.0;
-    public static final int Y_AXIS_CORRECTION = -1; // Positive amp values will have a lower X-axis score, thus being placed higher in the canvas.
-    public static final int Y_AXIS_OFFSET = java.lang.Math.round(CANVAS_HEIGHT / 2); // Center the wave around the middle of the display.
-    public static final double X_SCALE = Wave.RESOLUTION_CELLS_PER_METERS / (X_ITERATOR * X_SCALE_MULTIPLIER); // px/meter (1000px = 1 meter)
+    static final int CANVAS_WIDTH = 1000;
+    static final int CANVAS_HEIGHT = 160;
+    static final int LABEL_WIDTH = 100;
+    static final int LABEL_HEIGHT = 10;
+    static final int X_ITERATOR = 10;
+    static final int X_SCALE_MULTIPLIER = 1;
+    static final double AMP_RESOLUTION = 5.0;
+    static final int Y_AXIS_CORRECTION = -1; // Positive amp values will have a lower X-axis score, thus being placed higher in the canvas.
+    static final int Y_AXIS_OFFSET = java.lang.Math.round(CANVAS_HEIGHT / 2); // Center the wave around the middle of the se.femtearenan.fqHarmony.display.
+    static final double X_SCALE = Wave.RESOLUTION_CELLS_PER_METERS / (X_ITERATOR * X_SCALE_MULTIPLIER); // px/meter (1000px = 1 meter)
 
     Canvas canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
     GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
@@ -62,7 +60,7 @@ public class WaveDisplay {
         drawShapes(waveColor);
     }
 
-    public Group waveGroup() throws Exception {
+    public Group waveGroup() {
         Group root = new Group();
         drawShapes();
         StackPane stack = new StackPane();
@@ -192,10 +190,9 @@ public class WaveDisplay {
             graphicsContext.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
             graphicsContext.setStroke(Color.WHITE);
             graphicsContext.rect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            Wave wave1Combined = WaveCombiner.combineInteractingWaves(2, wave);
             graphicsContext.setStroke(waveColor);
             graphicsContext.setLineWidth(2);
-            drawWaves(wave1Combined);
+            drawWaves(wave);
         }
     }
 
