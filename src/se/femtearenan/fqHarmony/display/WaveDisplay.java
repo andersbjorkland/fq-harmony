@@ -174,15 +174,7 @@ public class WaveDisplay {
     }
 
     private void drawShapes() {
-        if (wave != null) {
-            graphicsContext.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            graphicsContext.setStroke(Color.WHITE);
-            graphicsContext.rect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            Wave wave1Combined = WaveCombiner.combineInteractingWaves(2, wave);
-            graphicsContext.setStroke(Color.LIGHTBLUE);
-            graphicsContext.setLineWidth(2);
-            drawWaves(wave1Combined);
-        }
+       drawShapes(Color.LIGHTBLUE);
     }
 
     private void drawShapes(Color waveColor) {
@@ -190,9 +182,10 @@ public class WaveDisplay {
             graphicsContext.clearRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
             graphicsContext.setStroke(Color.WHITE);
             graphicsContext.rect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            Wave wave1Combined = WaveCombiner.combineInteractingWaves(1, wave);
             graphicsContext.setStroke(waveColor);
             graphicsContext.setLineWidth(2);
-            drawWaves(wave);
+            drawWaves(wave1Combined);
         }
     }
 
@@ -204,8 +197,7 @@ public class WaveDisplay {
             y1 = interpretY(combinedWave.getAmplitude()[i]);
             x2 = x1 + X_SCALE_MULTIPLIER;
             if ((i + X_ITERATOR) >= combinedWave.getAmplitude().length) {
-                y2 = interpretY(combinedWave.getAmplitude()[0]);
-
+                break;
             } else {
                 y2 = interpretY(combinedWave.getAmplitude()[i + X_ITERATOR]);
             }
